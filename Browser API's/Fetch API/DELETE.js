@@ -1,8 +1,13 @@
 export default function DELETE(url, contentType) {
-    if (contentType == "json") {
-      return fetch(url, {
+  const controller = new AbortController();
+  const signal = controller.signal;
+
+  if (contentType == "json") {
+    return {
+      promise: fetch(url, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json" },
+        signal,
       }).then((response) => {
         return response.json().then((json) => {
           return {
@@ -11,14 +16,18 @@ export default function DELETE(url, contentType) {
             response_type: response.type,
             response_header: response.headers,
             response_body: response.body,
-            response_body_used: response.bodyUsed
+            response_body_used: response.bodyUsed,
           };
         });
-      });
-    } else if (contentType == "xml") {
-      return fetch(url, {
+      }),
+      cancel: () => controller.abort(),
+    };
+  } else if (contentType == "xml") {
+    return {
+      promise: fetch(url, {
         method: "DELETE",
-        headers: { "Content-Type": "application/xml" }
+        headers: { "Content-Type": "application/xml" },
+        signal,
       }).then((response) => {
         return response.text().then((xml) => {
           const parser = new DOMParser();
@@ -31,9 +40,11 @@ export default function DELETE(url, contentType) {
             response_type: response.type,
             response_header: response.headers,
             response_body: response.body,
-            response_body_used: response.bodyUsed
+            response_body_used: response.bodyUsed,
           };
         });
-      });
-    }
+      }),
+      cancel: () => controller.abort(),
+    };
   }
+}
