@@ -12,14 +12,14 @@ export default class Breeze {
   PUT = PUT;
   PATCH = PATCH;
 }
+// Useage
+// const breeze = new Breeze();
+// const { promise, cancel } = breeze.POST(
+//   "https://jsonplaceholder.typicode.com/posts",
+//   "json",
+//   {}
+// );
 
-const breeze = new Breeze();
-const { promise, cancel } = breeze.POST(
-  "https://jsonplaceholder.typicode.com/posts",
-  "json",
-  {}
-);
+// promise.then((data) => console.log(data)).catch((error) => console.log(error));
 
-promise.then((data) => console.log(data)).catch((error) => console.log(error));
-
-// cancel();
+// // cancel();
