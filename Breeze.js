@@ -15,9 +15,10 @@ export default class Breeze {
 // Useage
 const breeze = new Breeze();
 
-const onProgress = (progress) => {
+const onProgress = (progress, loaded, total) => {
   console.log(`Progress: ${progress}%`); // Output the progress
 };
+
 const { promise, cancel } = breeze.PUT(
   "https://jsonplaceholder.typicode.com/posts/1",
   "json",
@@ -27,8 +28,8 @@ const { promise, cancel } = breeze.PUT(
     body: "bar",
     userId: 1,
   },
-  onProgress,
-  10000
+  10000,
+  onProgress
 );
 
 promise.then((data) => console.log(data)).catch((error) => console.log(error));
