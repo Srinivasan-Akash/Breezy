@@ -17,9 +17,8 @@ const breeze = new Breeze();
 const { promise, cancel } = breeze.POST(
   "https://jsonplaceholder.typicode.com/posts",
   "json",
-  {}
+  {},
+  100
 );
 
 promise.then((data) => console.log(data)).catch((error) => console.log(error));
-
-// cancel();
