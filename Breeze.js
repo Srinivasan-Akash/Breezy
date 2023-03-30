@@ -19,7 +19,7 @@ const onProgress = (progress, loaded, total) => {
   console.log(`Progress: ${progress}%`); // Output the progress
 };
 
-const { promise, cancel } = breeze.GET(
+const { promise, cancel } = breeze.POST(
   "https://jsonplaceholder.typicode.com/posts",
   "json",
   {},

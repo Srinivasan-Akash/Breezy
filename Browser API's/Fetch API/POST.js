@@ -1,6 +1,5 @@
 export default function POST(url, contentType, data, timeout = 60000, onProgress = () => {}) {
-  const controller = new AbortController();
-  const signal = controller.signal;
+  let xhr;
 
   const promise = new Promise((resolve, reject) => {
     let headers = {};
@@ -29,7 +28,7 @@ export default function POST(url, contentType, data, timeout = 60000, onProgress
       body = new Blob([data], { type: "application/octet-stream" });
     }
 
-    const xhr = new XMLHttpRequest();
+    xhr = new XMLHttpRequest();
     xhr.open("POST", url);
     xhr.timeout = timeout;
     xhr.withCredentials = true;
@@ -84,11 +83,11 @@ export default function POST(url, contentType, data, timeout = 60000, onProgress
     };
 
     xhr.onabort = () => {
-      reject(new Error("Breeze:- Request was cancelled"));
+      reject(console.log("Breeze:- Request was cancelled"));
     };
 
     xhr.send(body);
   });
 
-  return { promise, cancel: () => controller.abort() };
+  return { promise, cancel: () => xhr.abort() };
 }
