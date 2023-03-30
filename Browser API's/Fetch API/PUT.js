@@ -28,6 +28,7 @@ export default function PUT(url, contentType, data, timeout = 60000) {
       headers = {};
       body = new Blob([data], { type: "application/octet-stream" });
     }
+
     const timeoutId = setTimeout(() => {
       controller.abort();
       reject("Breeze:- Request timed out");

@@ -12,15 +12,23 @@ export default class Breeze {
   PUT = PUT;
   PATCH = PATCH;
 }
-
+// Useage
 const breeze = new Breeze();
-const { promise, cancel } = breeze.POST(
-  "https://jsonplaceholder.typicode.com/posts",
+
+const onProgress = (progress) => {
+  console.log(`Progress: ${progress}%`); // Output the progress
+};
+const { promise, cancel } = breeze.PUT(
+  "https://jsonplaceholder.typicode.com/posts/1",
   "json",
-  {},
-  100
+  {
+    id: 1,
+    title: "foo",
+    body: "bar",
+    userId: 1,
+  },
+  onProgress,
+  10000
 );
 
 promise.then((data) => console.log(data)).catch((error) => console.log(error));
-
-// cancel();
