@@ -19,15 +19,10 @@ const onProgress = (progress, loaded, total) => {
   console.log(`Progress: ${progress}%`); // Output the progress
 };
 
-const { promise, cancel } = breeze.PUT(
-  "https://jsonplaceholder.typicode.com/posts/1",
+const { promise, cancel } = breeze.GET(
+  "https://jsonplaceholder.typicode.com/posts",
   "json",
-  {
-    id: 1,
-    title: "foo",
-    body: "bar",
-    userId: 1,
-  },
+  {},
   10000,
   onProgress
 );
