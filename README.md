@@ -274,5 +274,3 @@ promise.then((data) => {
 #### 4. Resources
 #### 5. Credits
 #### 6. License 
-
-Rewrite this documentation for this library so other developers can use it (for github repo and npm docs) with precise explanation with other structure in md. Also fill other empty sections
