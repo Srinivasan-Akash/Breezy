@@ -75,15 +75,15 @@ export default function POST(url, contentType, data, timeout = 60000, onProgress
     };
 
     xhr.onerror = () => {
-      reject(new Error("Breeze:- Network Error"));
+      reject(new Error("Breezy:- Network Error"));
     };
 
     xhr.ontimeout = () => {
-      reject(new Error("Breeze:- Request timed out"));
+      reject(new Error("Breezy:- Request timed out"));
     };
 
     xhr.onabort = () => {
-      reject(console.log("Breeze:- Request was cancelled"));
+      reject(console.log("Breezy:- Request was cancelled"));
     };
 
     xhr.send(body);

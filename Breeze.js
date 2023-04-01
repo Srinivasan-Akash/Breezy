@@ -4,7 +4,7 @@ import DELETE from "./Browser API's/Fetch API/DELETE.js";
 import PUT from "./Browser API's/Fetch API/PUT.js";
 import PATCH from "./Browser API's/Fetch API/PATCH.js";
 
-export default class Breeze {
+export default class Breezy {
   constructor() {}
   GET = GET;
   POST = POST;
@@ -12,19 +12,24 @@ export default class Breeze {
   PUT = PUT;
   PATCH = PATCH;
 }
-// Useage
-const breeze = new Breeze();
+// Initialize
+const breeze = new Breezy();
 
-const onProgress = (progress, loaded, total) => {
-  console.log(`Progress: ${progress}%`); // Output the progress
-};
+// Variables (optional)
+const API_URL = "https://jsonplaceholder.typicode.com/posts";
+const CONTENT_TYPE = "json";
 
-const { promise, cancel } = breeze.POST(
-  "https://jsonplaceholder.typicode.com/posts",
-  "json",
-  {},
-  10000,
-  onProgress
+// GET Request
+const { promise, cancel } = breeze.GET(
+  API_URL,
+  CONTENT_TYPE
 );
 
-promise.then((data) => console.log(data)).catch((error) => console.log(error));
+setTimeout(() => cancel(), 100)
+
+// Handle GET Request
+promise.then((data) => {
+  console.log(data)
+}).catch((error) => {
+  console.log(error)
+});

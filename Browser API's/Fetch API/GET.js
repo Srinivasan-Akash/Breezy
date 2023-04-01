@@ -1,4 +1,4 @@
-export default function GET(url, contentType) {
+export default function GET(url, contentType, timeout = 60000) {
   const controller = new AbortController();
   const signal = controller.signal;
 
@@ -60,5 +60,7 @@ export default function GET(url, contentType) {
     }
   });
 
-  return { promise, cancel: () => controller.abort() };
+  setTimeout(() => {controller.abort(); console.log("Breezy:- Response Timed Out")}, timeout)
+
+  return { promise, cancel: () => {controller.abort(); console.log("Breezy:- Request Cancelled")} };
 }
